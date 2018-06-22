@@ -1,0 +1,37 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">MoodTracker</string>
+    <string name="goodMood">goodMood</string>
+
+    <string name="save_mood__key">pref_key_mood</string>
+    <string name="save_dayLong__key">pref_keyLong_day</string>
+    <string name="save_commentary__key">pref_key_commentary</string>
+
+    <string name="save_arrayListMood__key">pref_key_arrayListMood</string>
+
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="enter">ENTER</string>
+    <string name="cancel">CANCEL</string>
+
+    <string name="very_bad_mood">very bad mood</string>
+    <string name="bad_mood">bad mood</string>
+    <string name="neutral_mood">neutral mood</string>
+    <string name="good_mood">good mood</string>
+    <string name="very_good_mood">very good mood</string>
+
+    <string name="my_mood_of_the_day">My mood of the day</string>
+    <string name="today_i_am">Today i am</string>
+
+
+    <string name="yesterday">Yesterday</string>
+    <string name="before_yesterday">The day before yesterday</string>
+    <string name="three_days_ago">Three days ago</string>
+    <string name="four_days_ago">Four days ago</string>
+    <string name="five_days_ago">Five days ago</string>
+    <string name="six_days_ago">Six days ago</string>
+    <string name="a_week_ago">A week ago</string>
+
+
+</resources>

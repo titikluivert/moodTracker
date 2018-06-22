@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorSatisfied">#B8E986</color>
+    <color name="colorNeutral">#86B3E6</color>
+    <color name="colorVerySatisfied">#F8EC50</color>
+    <color name="colorVeryDissatisfied">#DE3C50</color>
+    <color name="colorDissatisfied">#9B9B9B</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="colorToast">#323232</color>
+</resources>

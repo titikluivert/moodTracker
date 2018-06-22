@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+
+    <string name="enter">VALIDER</string>
+    <string name="cancel">ANNULER</string>
+
+    <string name="very_bad_mood">tres mauvaise humeur</string>
+    <string name="bad_mood">mauvaise humeur</string>
+    <string name="neutral_mood">humeur neutre</string>
+    <string name="good_mood">bonne humeur</string>
+    <string name="very_good_mood">tres bonne humeur</string>
+
+    <string name="my_mood_of_the_day">Mon humeur du jour</string>
+    <string name="today_i_am">Aujour\'hui je suis</string>
+
+
+
+    <string name="yesterday">Hier</string>
+    <string name="before_yesterday">Avant-hier</string>
+    <string name="three_days_ago">Il y a trois jours</string>
+    <string name="four_days_ago">il y a quatre jours</string>
+    <string name="five_days_ago">Il y a cinq jours</string>
+    <string name="six_days_ago">Il y a 6 jours</string>
+    <string name="a_week_ago">Il y a une semaine</string>
+</resources>
