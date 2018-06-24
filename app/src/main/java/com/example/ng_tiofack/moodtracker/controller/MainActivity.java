@@ -11,6 +11,7 @@ import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -74,8 +75,11 @@ public class MainActivity extends AppCompatActivity {
         mCommentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+               final ViewGroup parent = null;
+
                 LayoutInflater layoutInflaterAndroid = LayoutInflater.from(MainActivity.this);
-                View mView = layoutInflaterAndroid.inflate(R.layout.commentary_popup, null);
+                View mView = layoutInflaterAndroid.inflate(R.layout.commentary_popup,parent,false);
                 AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilderUserInput.setView(mView);
 
@@ -139,8 +143,10 @@ public class MainActivity extends AppCompatActivity {
 
             // with a long press on a display you should be able to trigger email sending
 
+            final ViewGroup parent = null;
+
             LayoutInflater layoutInflaterAndroid = LayoutInflater.from(MainActivity.this);
-            View mView = layoutInflaterAndroid.inflate(R.layout.email_option, null);
+            View mView = layoutInflaterAndroid.inflate(R.layout.email_option, parent,false);
             AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(MainActivity.this);
             alertDialogBuilderUserInput.setView(mView);
 
@@ -180,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-
             if (e1.getY() < e2.getY()) {
                 mMoodID--;
 
@@ -210,12 +215,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
 
-
+        // this function get the mood saved from the user
         mySavedValue = mMood.getSavedMood(MainActivity.this, getString(R.string.save_commentary__key), getString(R.string.save_mood__key),
                 getString(R.string.save_dayLong__key));
 
         long currentDay = System.currentTimeMillis() / MoodResources.timeInMilliSecToHour;
 
+
+        // this function add a array list and save the mood into it.
         if (mySavedValue.getSavedDay() != currentDay) {
 
             listMood.add(new Mood(mySavedValue.getMoodID(), mySavedValue.getSavedDay(), mySavedValue.getCommentary()));
@@ -232,6 +239,7 @@ public class MainActivity extends AppCompatActivity {
                     );
         }
 
+        // this function save the mood of the day every time the users changes the mood
         mMood
                 .saveMood
                         (MainActivity.this,
