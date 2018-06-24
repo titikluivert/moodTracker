@@ -3,7 +3,7 @@ package com.example.ng_tiofack.moodtracker.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +22,10 @@ import java.util.List;
 
 public class MoodHistActivity extends AppCompatActivity {
 
-
+    //define a empty list of mood. where the all the moods will be stored
     List<Mood> savedListMood = new ArrayList<>();
+
+    // define a index of mood use
     int indexID = 0;
 
     @Override
@@ -43,8 +45,8 @@ public class MoodHistActivity extends AppCompatActivity {
                 , findViewById(R.id.relativeLyt_1), findViewById(R.id.relativeLyt_2), findViewById(R.id.relativeLyt_3),
                 findViewById(R.id.relativeLyt_4), findViewById(R.id.relativeLyt_5), findViewById(R.id.relativeLyt_6)};
 
-        Display display = getWindowManager().getDefaultDisplay();
-        int width = display.getWidth();
+        DisplayMetrics display = this.getResources().getDisplayMetrics();
+        int width = display.widthPixels;
 
         for (RelativeLayout iRelLyt : relativeLyt
                 ) {
@@ -81,7 +83,7 @@ public class MoodHistActivity extends AppCompatActivity {
                     indexID++;
                 }
             }
-            for ( int i = 0; i < relativeLyt.length; i++) {
+            for (int i = 0; i < relativeLyt.length; i++) {
                 final int finalI = i;
                 imageView[i].
                         setOnClickListener(new View.OnClickListener() {
@@ -104,6 +106,7 @@ public class MoodHistActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
             }
 
 
