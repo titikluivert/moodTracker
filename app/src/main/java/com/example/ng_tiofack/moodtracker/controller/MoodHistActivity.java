@@ -23,10 +23,10 @@ import java.util.List;
 public class MoodHistActivity extends AppCompatActivity {
 
     //define a empty list of mood. where the all the moods will be stored
-    List<Mood> savedListMood = new ArrayList<>();
+    private List<Mood> savedListMood = new ArrayList<>();
 
     // define a index of mood use
-    int indexID = 0;
+    private int indexID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +48,7 @@ public class MoodHistActivity extends AppCompatActivity {
         DisplayMetrics display = this.getResources().getDisplayMetrics();
         int width = display.widthPixels;
 
-        for (RelativeLayout iRelLyt : relativeLyt
-                ) {
-
+        for (RelativeLayout iRelLyt : relativeLyt) {
             iRelLyt.setVisibility(View.INVISIBLE);
         }
 

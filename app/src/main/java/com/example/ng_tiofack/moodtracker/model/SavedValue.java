@@ -20,7 +20,6 @@ public class SavedValue {
         return Commentary;
     }
 
-
     public long getSavedDay() {
         return savedDay;
     }

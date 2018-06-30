@@ -23,8 +23,11 @@ import com.example.ng_tiofack.moodtracker.utils.MoodResources;
 import com.example.ng_tiofack.moodtracker.utils.Utils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+
+//First screen to be shown
 public class MainActivity extends AppCompatActivity {
 
     // declaration of the gesture detector object
@@ -34,22 +37,22 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mImageView;
 
     // default mood stored as an ID
-    int mMoodID = 3;
+    private int mMoodID = 3;
 
     //comment left by the user on a mood
-    String mCommentary;
+    private String mCommentary;
 
     //Button to view the historic and Button to set a comment
-    Button mHistButton, mCommentButton;
+    private Button mHistButton, mCommentButton;
 
     //defined a save value class to get the saved value
-    SavedValue mySavedValue;
+    private SavedValue mySavedValue;
 
     //instantiate a class mood to use it in the main activity
-    Mood mMood = new Mood();
+    private Mood mMood = new Mood();
 
     //define a empty list of mood. where the all the moods will be stored
-    List<Mood> listMood = new ArrayList<>();
+    private List<Mood> listMood = new ArrayList<>();
 
 
     @Override
@@ -78,8 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
                final ViewGroup parent = null;
 
+               //inflate a custom view for the dialog
                 LayoutInflater layoutInflaterAndroid = LayoutInflater.from(MainActivity.this);
-                View mView = layoutInflaterAndroid.inflate(R.layout.commentary_popup,parent,false);
+                View mView = layoutInflaterAndroid.inflate(R.layout.commentary_popup, parent,false);
                 AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilderUserInput.setView(mView);
 
@@ -115,9 +119,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
-    public class LearnGesture implements GestureDetector.OnGestureListener
-
-    {
+    private class LearnGesture implements GestureDetector.OnGestureListener {
         @Override
         public boolean onDown(MotionEvent e) {
             return false;
@@ -163,7 +165,7 @@ public class MainActivity extends AppCompatActivity {
                             String to = "";
                             intent.putExtra(Intent.EXTRA_EMAIL, to);
                             intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.my_mood_of_the_day));
-                            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.today_i_am) + getString(MoodResources.emailMessage[mMoodID]));
+                            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.today_i_am) +" "+ getString(MoodResources.emailMessage[mMoodID]));
 
                             intent.setType("message/rfc822");
 
@@ -186,24 +188,15 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-            if (e1.getY() < e2.getY()) {
+            if (e1.getY() < e2.getY() && mMoodID > 0 ) {
                 mMoodID--;
-
-                if (mMoodID < 0) {
-                    mMoodID = 0;
-                }
-                mImageView.setBackgroundResource(MoodResources.mood_color[mMoodID]);
-                mImageView.setImageResource(MoodResources.mood_images[mMoodID]);
             }
-            if (e1.getY() > e2.getY()) {
+            else if (e1.getY() > e2.getY() && mMoodID < 4) {
                 mMoodID++;
-
-                if (mMoodID > 4) {
-                    mMoodID = 4;
-                }
-                mImageView.setBackgroundResource(MoodResources.mood_color[mMoodID]);
-                mImageView.setImageResource(MoodResources.mood_images[mMoodID]);
             }
+
+            mImageView.setBackgroundResource(MoodResources.mood_color[mMoodID]);
+            mImageView.setImageResource(MoodResources.mood_images[mMoodID]);
 
             mCommentary = "";
             return true;
@@ -216,11 +209,10 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         // this function get the mood saved from the user
-        mySavedValue = mMood.getSavedMood(MainActivity.this, getString(R.string.save_commentary__key), getString(R.string.save_mood__key),
+        mySavedValue = mMood.getSavedMood(this, getString(R.string.save_commentary__key), getString(R.string.save_mood__key),
                 getString(R.string.save_dayLong__key));
 
         long currentDay = System.currentTimeMillis() / MoodResources.timeInMilliSecToHour;
-
 
         // this function add a array list and save the mood into it.
         if (mySavedValue.getSavedDay() != currentDay) {
@@ -233,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
 
             Utils.
                     saveArrayMoodList(
-                            MainActivity.this,
+                            this,
                             listMood,
                             getString(R.string.save_arrayListMood__key)
                     );
@@ -242,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
         // this function save the mood of the day every time the users changes the mood
         mMood
                 .saveMood
-                        (MainActivity.this,
+                        (this,
                                 getString(R.string.save_commentary__key), getString(R.string.save_mood__key), getString(R.string.save_dayLong__key),
                                 mMoodID, currentDay, mCommentary);
 

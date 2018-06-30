@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Utils {
@@ -29,6 +30,7 @@ public class Utils {
         Gson gson = new Gson();
         String json = sharedPreferences.getString(key, null);
         Type type = new TypeToken<List<Mood>>() {}.getType();
-        return gson.fromJson(json, type);
+        List<Mood> listMood =  gson.fromJson(json, type);
+        return listMood == null ? new ArrayList<Mood>() : listMood;
     }
 }
