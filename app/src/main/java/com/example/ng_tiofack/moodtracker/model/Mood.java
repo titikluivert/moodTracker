@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.example.ng_tiofack.moodtracker.R;
 import com.example.ng_tiofack.moodtracker.utils.MoodResources;
 
 public class Mood {
@@ -33,31 +34,31 @@ public class Mood {
         return comment;
     }
 
-    public void saveMood(Context context, String key_comment, String key_moodID, String key_day, int moodID, long savedDay, String Commentary) {
+    public void saveMood(Context context, int moodID, long savedDay, String Commentary) {
+
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key_comment, Commentary);
-        editor.putInt(key_moodID, moodID);
-        editor.putLong(key_day, savedDay);
+        editor.putString(context.getString(R.string.save_commentary__key), Commentary);
+        editor.putInt(context.getString(R.string.save_mood__key), moodID);
+        editor.putLong(context.getString(R.string.save_dayLong__key), savedDay);
 
-        editor.commit();
+        editor.apply();
     }
 
 
-    public SavedValue getSavedMood(Context context, String prefKey_comment, String prefKey_moodID, String prefKey_day) {
+    public SavedValue getSavedMood(Context context) {
 
         long current_day = System.currentTimeMillis() / MoodResources.timeInMilliSecToHour;
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
-        SavedValue mSavedValues = new SavedValue(
+        return new SavedValue(
 
-                sharedPreferences.getString(prefKey_comment, ""),
-                sharedPreferences.getInt(prefKey_moodID, 3),
-                sharedPreferences.getLong(prefKey_day, current_day)
+                sharedPreferences.getString(context.getString(R.string.save_commentary__key), ""),
+                sharedPreferences.getInt(context.getString(R.string.save_mood__key), 3),
+                sharedPreferences.getLong(context.getString(R.string.save_dayLong__key), current_day)
         );
 
-        return mSavedValues;
     }
 
 }

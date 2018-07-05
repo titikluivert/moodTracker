@@ -24,4 +24,10 @@
     <string name="five_days_ago">Il y a cinq jours</string>
     <string name="six_days_ago">Il y a 6 jours</string>
     <string name="a_week_ago">Il y a une semaine</string>
+
+
+    <string name="send_email_msg">Veux-tu envoyer ton humeur par email a un ami ?</string>
+    <string name="enter_comment">Entrer un commentaire</string>
+    <string name="commentary">Commentaire</string>
+
 </resources>

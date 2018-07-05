@@ -10,9 +10,7 @@
         android:id="@+id/EmailTitla"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Veux-tu envoyer ton humeur par email a un ami ? "
+        android:text="@string/send_email_msg"
         />
-
-
 
 </LinearLayout>

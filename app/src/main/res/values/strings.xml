@@ -1,4 +1,4 @@
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources >
 
     <string name="app_name">MoodTracker</string>
     <string name="goodMood">goodMood</string>
@@ -33,5 +33,9 @@
     <string name="six_days_ago">Six days ago</string>
     <string name="a_week_ago">A week ago</string>
 
+
+    <string name="send_email_msg">Do you want to send your mood by email to a friend ?</string>
+    <string name="enter_comment">Enter a comment</string>
+    <string name="commentary">Comment</string>
 
 </resources>

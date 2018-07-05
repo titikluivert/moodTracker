@@ -23,7 +23,6 @@ import com.example.ng_tiofack.moodtracker.utils.MoodResources;
 import com.example.ng_tiofack.moodtracker.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 
@@ -79,11 +78,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-               final ViewGroup parent = null;
+                final ViewGroup parent = null;
 
-               //inflate a custom view for the dialog
+                //inflate a custom view for the dialog
                 LayoutInflater layoutInflaterAndroid = LayoutInflater.from(MainActivity.this);
-                View mView = layoutInflaterAndroid.inflate(R.layout.commentary_popup, parent,false);
+                View mView = layoutInflaterAndroid.inflate(R.layout.commentary_popup, parent, false);
                 AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(MainActivity.this);
                 alertDialogBuilderUserInput.setView(mView);
 
@@ -148,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             final ViewGroup parent = null;
 
             LayoutInflater layoutInflaterAndroid = LayoutInflater.from(MainActivity.this);
-            View mView = layoutInflaterAndroid.inflate(R.layout.email_option, parent,false);
+            View mView = layoutInflaterAndroid.inflate(R.layout.email_option, parent, false);
             AlertDialog.Builder alertDialogBuilderUserInput = new AlertDialog.Builder(MainActivity.this);
             alertDialogBuilderUserInput.setView(mView);
 
@@ -165,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                             String to = "";
                             intent.putExtra(Intent.EXTRA_EMAIL, to);
                             intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.my_mood_of_the_day));
-                            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.today_i_am) +" "+ getString(MoodResources.emailMessage[mMoodID]));
+                            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.today_i_am) + " " + getString(MoodResources.emailMessage[mMoodID]));
 
                             intent.setType("message/rfc822");
 
@@ -188,10 +187,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 
-            if (e1.getY() < e2.getY() && mMoodID > 0 ) {
+            if (e1.getY() < e2.getY() && mMoodID > 0) {
                 mMoodID--;
-            }
-            else if (e1.getY() > e2.getY() && mMoodID < 4) {
+            } else if (e1.getY() > e2.getY() && mMoodID < 4) {
                 mMoodID++;
             }
 
@@ -209,18 +207,45 @@ public class MainActivity extends AppCompatActivity {
         super.onPause();
 
         // this function get the mood saved from the user
-        mySavedValue = mMood.getSavedMood(this, getString(R.string.save_commentary__key), getString(R.string.save_mood__key),
-                getString(R.string.save_dayLong__key));
+        mySavedValue = mMood.getSavedMood(this);
 
         long currentDay = System.currentTimeMillis() / MoodResources.timeInMilliSecToHour;
+        int diffDay = (int) (currentDay - mySavedValue.getSavedDay());
 
         // this function add a array list and save the mood into it.
         if (mySavedValue.getSavedDay() != currentDay) {
 
-            listMood.add(new Mood(mySavedValue.getMoodID(), mySavedValue.getSavedDay(), mySavedValue.getCommentary()));
+            // in case of the users phone settings were wrong and the date was in the past.
+            if (diffDay < 0) {
 
-            if (listMood.size() > MoodResources.maxDimenOfListArray) {
-                listMood.remove(0);
+                int lostDay = -1 * (diffDay);
+
+                if (listMood.size() != 0) {
+
+                    if (listMood.size() > lostDay) {
+                        for (int i = 0; i < lostDay; i++) {
+                            listMood.remove(0);
+                        }
+                    } else {
+                        listMood.removeAll(listMood);
+                    }
+                }
+
+            } else {
+
+                if (diffDay == 1) {
+                    listMood.add(new Mood(mySavedValue.getMoodID(), mySavedValue.getSavedDay(), mySavedValue.getCommentary()));
+                    if (listMood.size() > MoodResources.maxDimenOfListArray) {
+                        listMood.remove(0);
+                    }
+                } else {
+                    for (int i = 0; i < diffDay; i++) {
+                        listMood.add(new Mood(mySavedValue.getMoodID(), mySavedValue.getSavedDay(), mySavedValue.getCommentary()));
+                        if (listMood.size() > MoodResources.maxDimenOfListArray) {
+                            listMood.remove(0);
+                        }
+                    }
+                }
             }
 
             Utils.
@@ -230,13 +255,10 @@ public class MainActivity extends AppCompatActivity {
                             getString(R.string.save_arrayListMood__key)
                     );
         }
-
         // this function save the mood of the day every time the users changes the mood
         mMood
                 .saveMood
-                        (this,
-                                getString(R.string.save_commentary__key), getString(R.string.save_mood__key), getString(R.string.save_dayLong__key),
-                                mMoodID, currentDay, mCommentary);
+                        (this, mMoodID, currentDay, mCommentary);
 
     }
 
