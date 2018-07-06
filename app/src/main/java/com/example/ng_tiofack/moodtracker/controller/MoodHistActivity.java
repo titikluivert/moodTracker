@@ -60,20 +60,25 @@ public class MoodHistActivity extends AppCompatActivity {
 
         if (savedListMood != null) {
 
+            //go through saveListMood in order to display the mood saved.
+
             for (Mood mood : savedListMood) {
 
+                // double check that, saveListMood doesn't exceed the maximal saved mood.
                 if (indexID < MoodResources.textViewMsg.length) {
                     relativeLyt[indexID].setVisibility(View.VISIBLE);
                     relativeLyt[indexID].setBackgroundResource(MoodResources.mood_color[mood.getMoodID()]);
 
+                    // display the mood length in historic layout according to corresponding length
                     double width_index = width * MoodResources.widthOfRelLyt[mood.getMoodID()] * 0.2;
                     ViewGroup.LayoutParams relLytParams = relativeLyt[indexID].getLayoutParams();
                     relLytParams.width = (int) width_index;
 
+                    // if no comment was enter, disable comment icon on saved Mood.
                     if (mood.getComment().isEmpty()) {
                         imageView[indexID].setVisibility(View.INVISIBLE);
                     }
-
+                    // write text on comment saved displayed mood
                     int pos = (savedListMood.size() - 1) - indexID;
                     if (pos < MoodResources.textViewMsg.length) {
                         textView[indexID].setText(getString(MoodResources.textViewMsg[pos]));

@@ -118,6 +118,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onTouchEvent(event);
     }
 
+    /** the class LearnGesture, which implements GestureDetector.OnGestureListener is used to notify
+      when gestures occur, like long press on screen, swipe down and up etc... */
+
     private class LearnGesture implements GestureDetector.OnGestureListener {
         @Override
         public boolean onDown(MotionEvent e) {
@@ -227,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
                             listMood.remove(0);
                         }
                     } else {
-                        listMood.removeAll(listMood);
+                        listMood.clear();
                     }
                 }
 
