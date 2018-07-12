@@ -11,35 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorSatisfied"
-        android:src="@drawable/ic_sentiment_satisfied_black_24dp"
-        android:contentDescription="@string/goodMood" />
+        android:contentDescription="@string/goodMood"
+        android:src="@drawable/ic_sentiment_satisfied_black_24dp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal">
+    <Button
+        android:id="@+id/activity_main_comment_btn"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/ic_note_add_black_24dp" />
 
-        <Button
-            android:id="@+id/activity_main_comment_btn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="450dp"
-            android:background="@drawable/ic_note_add_black_24dp" />
-
-        <Button
-            android:id="@+id/activity_main_hist_btn"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="46dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="270dp"
-            android:layout_marginStart="270dp"
-            android:layout_marginTop="450dp"
-            android:background="@drawable/ic_update_black_24dp" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/activity_main_hist_btn"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_update_black_24dp" />
 
 
 </RelativeLayout>
